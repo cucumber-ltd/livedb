@@ -3,7 +3,7 @@ assert = require 'assert'
 {createClient, createDoc, setup, teardown} = require './util'
 
 # This isn't working at the moment - we regressed.
-describe.skip 'presence', ->
+describe 'presence', ->
   beforeEach setup
 
   afterEach teardown
@@ -86,6 +86,7 @@ describe.skip 'presence', ->
             assert.deepEqual presence, {id:{x:'y'}}
             done()
 
+    # See https://github.com/share/livedb/blob/a03722599e7bec1f22d023f56a1b224932664f1d/lib/index.js#L586
     it 'moves the cursor when text is edited', (done) -> @create =>
       @client.submitPresence @cName, @docName, {v:1, p:['id'], val:{_cursor:[1,1]}}, (err) =>
         throw new Error err if err
